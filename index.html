@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>四级保命模板</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #fafafa;
+            color: #333;
+            line-height: 1.8;
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #111;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+        .section {
+            background: #fff;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #111;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .template-block {
+            margin-bottom: 1rem;
+        }
+        .en {
+            color: #333;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .en:hover { opacity: 0.7; }
+        .zh {
+            color: #888;
+            font-size: 0.85rem;
+            display: none;
+            margin-top: 0.25rem;
+            padding-left: 1rem;
+            border-left: 2px solid #e0e0e0;
+        }
+        .key {
+            color: #d32f2f;
+            font-weight: 500;
+        }
+        .optional {
+            color: #888;
+            font-style: italic;
+        }
+        .note {
+            background: #fffde7;
+            padding: 0.75rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 1rem;
+        }
+        .controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            background: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            color: #666;
+            transition: all 0.2s;
+        }
+        .btn:hover {
+            background: #f5f5f5;
+            color: #333;
+        }
+        .btn.active {
+            background: #333;
+            color: #fff;
+            border-color: #333;
+        }
+        .word-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .word-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem;
+            background: #f9f9f9;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+        .word-en { color: #333; }
+        .word-phonetic { color: #999; font-size: 0.75rem; margin-left: 0.25rem; }
+        .word-zh { color: #888; }
+        .phonetic {
+            font-size: 0.65rem;
+            color: #aaa;
+            vertical-align: super;
+            margin-left: 1px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h1>四级通用保命模板</h1>
+    <p class="subtitle">点击英文句子显示翻译 · 红色为关键替换词 · 灰色小字为音标</p>
+
+    <div class="controls">
+        <button class="btn" onclick="toggleAll(true)">显示全部翻译</button>
+        <button class="btn" onclick="toggleAll(false)">隐藏全部翻译</button>
+        <button class="btn" id="quizBtn" onclick="toggleQuiz()">默写模式</button>
+    </div>
+
+    <!-- 首段 -->
+    <div class="section">
+        <div class="section-title">首段：引入话题 + 表明观点</div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">Nowadays, stepping into an epoch<span class="phonetic">/ˈepək/</span> dominated by <span class="key">rapid technological advancement</span> / <span class="key">relentless<span class="phonetic">/rɪˈlentləs/</span> competition</span> / <span class="key">digital transformation</span>, <span class="key">___</span> has translated into an increasingly prevalent<span class="phonetic">/ˈprevələnt/</span> phenomenon among college students.</p>
+            <p class="zh">如今，步入一个由<span class="key">快速技术进步</span>/<span class="key">激烈竞争</span>/<span class="key">数字化转型</span>主导的时代，<span class="key">___</span>已经成为大学生中日益普遍的现象。</p>
+        </div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">As far as I am concerned / From my perspective, we should take <span class="key">___</span> seriously.</p>
+            <p class="zh">在我看来，我们应该认真对待<span class="key">___</span>。</p>
+        </div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)"><span class="key">___</span> serves as an invisible catalyst<span class="phonetic">/ˈkætəlɪst/</span> for personal and professional success.</p>
+            <p class="zh"><span class="key">___</span>是个人和职业成功的隐形催化剂。</p>
+        </div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">And the viewpoints are as follows.</p>
+            <p class="zh">观点如下。</p>
+        </div>
+    </div>
+
+    <!-- 中间段 -->
+    <div class="section">
+        <div class="section-title">中间段：论证观点</div>
+
+        <p style="color: #666; margin-bottom: 1rem; font-size: 0.9rem;">论点一：First and foremost</p>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">First and foremost, a pervasive<span class="phonetic">/pərˈveɪsɪv/</span> misconception<span class="phonetic">/ˌmɪskənˈsepʃn/</span> is that...</p>
+            <p class="zh">首先，一个普遍的误解是……</p>
+        </div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">While this view is understandable / Admittedly<span class="phonetic">/ədˈmɪtɪdli/</span>, a considerable<span class="phonetic">/kənˈsɪdərəbl/</span> number of people subscribe<span class="phonetic">/səbˈskraɪb/</span> to the same idea.</p>
+            <p class="zh">虽然这种观点可以理解 / 诚然，相当多的人认同同样的想法。</p>
+        </div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">However, this perspective<span class="phonetic">/pərˈspektɪv/</span> overlooks<span class="phonetic">/ˌoʊvərˈlʊk/</span>...</p>
+            <p class="zh">然而，这种观点忽视了……</p>
+        </div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">In fact, what matters is... / We <span class="key">can't</span> emphasize the importance of <span class="key">___</span> too much.</p>
+            <p class="zh">事实上，重要的是…… / 我们再怎么强调<span class="key">___</span>的重要性也不为过。</p>
+        </div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">Nothing is more important than <span class="key">doing ___</span>.</p>
+            <p class="zh">没有什么比<span class="key">做___</span>更重要的了。</p>
+        </div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">Conversely, those who neglect<span class="phonetic">/nɪˈɡlekt/</span> this dimension<span class="phonetic">/dɪˈmenʃn/</span> often find themselves overwhelmed<span class="phonetic">/ˌoʊvərˈwelmd/</span> when faced with unfamiliar problems.</p>
+            <p class="zh">相反，忽视这一方面的人在面对不熟悉的问题时往往会感到不知所措。</p>
+        </div>
+
+        <hr style="border: none; border-top: 1px solid #f0f0f0; margin: 1.5rem 0;">
+
+        <p style="color: #666; margin-bottom: 1rem; font-size: 0.9rem;">论点二：Furthermore</p>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">Furthermore<span class="phonetic">/ˌfɜːrðərˈmɔːr/</span>, there is no denying that...</p>
+            <p class="zh">此外，不可否认……</p>
+        </div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">Owing to / Due to / On account of <span class="key">___</span>, we will continuously confront<span class="phonetic">/kənˈfrʌnt/</span> multifaceted<span class="phonetic">/ˌmʌltiˈfæsɪtɪd/</span> challenges.</p>
+            <p class="zh">由于<span class="key">___</span>，我们将不断面临多方面的挑战。</p>
+        </div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">Consequently<span class="phonetic">/ˈkɑːnsɪkwentli/</span> / Therefore, it becomes <span class="key">imperative<span class="phonetic">/ɪmˈperətɪv/</span></span> / <span class="key">indispensable<span class="phonetic">/ˌɪndɪˈspensəbl/</span></span> / <span class="key">irreplaceable<span class="phonetic">/ˌɪrɪˈpleɪsəbl/</span></span> for somebody to <span class="key">___</span>.</p>
+            <p class="zh">因此，对某人来说，<span class="key">___</span>变得<span class="key">至关重要</span>/<span class="key">不可或缺</span>/<span class="key">不可替代</span>。</p>
+        </div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">...play a significant role in <span class="key">___</span>.</p>
+            <p class="zh">……在<span class="key">___</span>中发挥重要作用。</p>
+        </div>
+    </div>
+
+    <!-- 尾段 -->
+    <div class="section">
+        <div class="section-title">尾段：总结</div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">In conclusion,</p>
+            <p class="zh">总之，</p>
+        </div>
+
+        <p style="color: #666; margin: 1rem 0 0.5rem; font-size: 0.9rem;">观点A：双刃剑</p>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)"><span class="key">___</span> is a double-edged sword for <span class="key">___</span>.</p>
+            <p class="zh"><span class="key">___</span>对<span class="key">___</span>来说是一把双刃剑。</p>
+        </div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">It is <span class="key">crucial</span> / <span class="key">imperative<span class="phonetic">/ɪmˈperətɪv/</span></span> / <span class="key">indispensable<span class="phonetic">/ˌɪndɪˈspensəbl/</span></span> / <span class="key">irreplaceable<span class="phonetic">/ˌɪrɪˈpleɪsəbl/</span></span> for governments and individuals to take measures to maximize<span class="phonetic">/ˈmæksɪmaɪz/</span> the benefits while minimizing<span class="phonetic">/ˈmɪnɪmaɪz/</span> the harms, turning a potential crisis into an opportunity for growth.</p>
+            <p class="zh">政府和个人采取措施<span class="key">至关重要</span>，以最大化利益、最小化危害，将潜在危机转化为成长机遇。</p>
+        </div>
+
+        <p style="color: #666; margin: 1.5rem 0 0.5rem; font-size: 0.9rem;">观点B：积极作用</p>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)"><span class="key">___</span> serves as an invisible catalyst<span class="phonetic">/ˈkætəlɪst/</span> for personal and professional success. This capacity translates into better decision-making in both academic and professional contexts.</p>
+            <p class="zh"><span class="key">___</span>是个人和职业成功的隐形催化剂。这种能力转化为学术和专业背景下更好的决策能力。</p>
+        </div>
+
+        <p style="color: #666; margin: 1.5rem 0 0.5rem; font-size: 0.9rem;">通用结尾句</p>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">The whole society / Government should pay close attention to the problem of <span class="key">___</span>. Only in this way can we have a bright and promising future.</p>
+            <p class="zh">全社会/政府应该密切关注<span class="key">___</span>的问题。只有这样，我们才能拥有光明和有前途的未来。</p>
+        </div>
+    </div>
+
+    <!-- 核心词汇 -->
+    <div class="section">
+        <div class="section-title">核心替换词</div>
+        <div class="word-list">
+            <div class="word-item"><span class="word-en">imperative</span><span class="word-phonetic">/ɪmˈperətɪv/</span><span class="word-zh">必要的</span></div>
+            <div class="word-item"><span class="word-en">indispensable</span><span class="word-phonetic">/ˌɪndɪˈspensəbl/</span><span class="word-zh">不可或缺的</span></div>
+            <div class="word-item"><span class="word-en">irreplaceable</span><span class="word-phonetic">/ˌɪrɪˈpleɪsəbl/</span><span class="word-zh">不可替代的</span></div>
+            <div class="word-item"><span class="word-en">consequently</span><span class="word-phonetic">/ˈkɑːnsɪkwentli/</span><span class="word-zh">因此</span></div>
+            <div class="word-item"><span class="word-en">therefore</span><span class="word-phonetic">/ˈðerfɔːr/</span><span class="word-zh">因此</span></div>
+            <div class="word-item"><span class="word-en">owing to</span><span class="word-phonetic">/ˈoʊɪŋ tuː/</span><span class="word-zh">由于</span></div>
+            <div class="word-item"><span class="word-en">on account of</span><span class="word-phonetic">/ən ˈkaʊnt əv/</span><span class="word-zh">由于</span></div>
+            <div class="word-item"><span class="word-en">pervasive</span><span class="word-phonetic">/pərˈveɪsɪv/</span><span class="word-zh">普遍的</span></div>
+            <div class="word-item"><span class="word-en">prevalent</span><span class="word-phonetic">/ˈprevələnt/</span><span class="word-zh">流行的</span></div>
+            <div class="word-item"><span class="word-en">multifaceted</span><span class="word-phonetic">/ˌmʌltiˈfæsɪtɪd/</span><span class="word-zh">多方面的</span></div>
+            <div class="word-item"><span class="word-en">catalyst</span><span class="word-phonetic">/ˈkætəlɪst/</span><span class="word-zh">催化剂</span></div>
+            <div class="word-item"><span class="word-en">overlook</span><span class="word-phonetic">/ˌoʊvərˈlʊk/</span><span class="word-zh">忽视</span></div>
+            <div class="word-item"><span class="word-en">neglect</span><span class="word-phonetic">/nɪˈɡlekt/</span><span class="word-zh">忽略</span></div>
+            <div class="word-item"><span class="word-en">subscribe to</span><span class="word-phonetic">/səbˈskraɪb tuː/</span><span class="word-zh">认同</span></div>
+            <div class="word-item"><span class="word-en">epoch</span><span class="word-phonetic">/ˈepək/</span><span class="word-zh">时代</span></div>
+            <div class="word-item"><span class="word-en">relentless</span><span class="word-phonetic">/rɪˈlentləs/</span><span class="word-zh">无情的</span></div>
+            <div class="word-item"><span class="word-en">misconception</span><span class="word-phonetic">/ˌmɪskənˈsepʃn/</span><span class="word-zh">误解</span></div>
+            <div class="word-item"><span class="word-en">considerable</span><span class="word-phonetic">/kənˈsɪdərəbl/</span><span class="word-zh">相当多的</span></div>
+            <div class="word-item"><span class="word-en">perspective</span><span class="word-phonetic">/pərˈspektɪv/</span><span class="word-zh">观点</span></div>
+            <div class="word-item"><span class="word-en">confront</span><span class="word-phonetic">/kənˈfrʌnt/</span><span class="word-zh">面对</span></div>
+            <div class="word-item"><span class="word-en">dimension</span><span class="word-phonetic">/dɪˈmenʃn/</span><span class="word-zh">方面</span></div>
+            <div class="word-item"><span class="word-en">overwhelmed</span><span class="word-phonetic">/ˌoʊvərˈwelmd/</span><span class="word-zh">不知所措的</span></div>
+            <div class="word-item"><span class="word-en">maximize</span><span class="word-phonetic">/ˈmæksɪmaɪz/</span><span class="word-zh">最大化</span></div>
+            <div class="word-item"><span class="word-en">minimize</span><span class="word-phonetic">/ˈmɪnɪmaɪz/</span><span class="word-zh">最小化</span></div>
+            <div class="word-item"><span class="word-en">furthermore</span><span class="word-phonetic">/ˌfɜːrðərˈmɔːr/</span><span class="word-zh">此外</span></div>
+            <div class="word-item"><span class="word-en">admittedly</span><span class="word-phonetic">/ədˈmɪtɪdli/</span><span class="word-zh">诚然</span></div>
+            <div class="word-item"><span class="word-en">multifaceted</span><span class="word-phonetic">/ˌmʌltiˈfæsɪtɪd/</span><span class="word-zh">多方面的</span></div>
+        </div>
+    </div>
+
+    <!-- 句型公式 -->
+    <div class="section">
+        <div class="section-title">句型公式</div>
+        <div class="template-block">
+            <p class="en">We <span class="key">can't</span> emphasize the importance of <span class="key">N/doing</span> too much.</p>
+            <p class="zh" style="display:block; color: #888;">我们再怎么强调……的重要性也不为过。</p>
+        </div>
+        <div class="template-block">
+            <p class="en">Nothing is more important than <span class="key">N/doing</span>.</p>
+            <p class="zh" style="display:block; color: #888;">没有什么比……更重要的了。</p>
+        </div>
+        <div class="template-block">
+            <p class="en">It is <span class="key">adj</span> for sb to do sth.</p>
+            <p class="zh" style="display:block; color: #888;">对某人来说做某事是……的。</p>
+        </div>
+        <div class="template-block">
+            <p class="en">Only in this way can we <span class="key">V</span>.</p>
+            <p class="zh" style="display:block; color: #888;">只有这样我们才能……（倒装句）</p>
+        </div>
+    </div>
+
+    <div class="note">
+        💡 使用方法：点击英文句子显示/隐藏翻译 · 默写模式下隐藏所有翻译，点击显示答案 · 灰色小字为音标，帮助记忆发音
+    </div>
+
+    <hr style="border: none; border-top: 2px solid #333; margin: 3rem 0;">
+
+    <h2 style="font-size: 1.3rem; font-weight: 600; margin-bottom: 2rem; color: #111;">示例范文</h2>
+
+    <!-- 范文一：在线学习 -->
+    <div class="section" style="border-left: 4px solid #4caf50;">
+        <div class="section-title" style="color: #4caf50;">范文一：Online Learning 在线学习（正面观点）</div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">Nowadays, stepping into an epoch<span class="phonetic">/ˈepək/</span> dominated by <span class="key">digital transformation</span>, online learning has translated into an increasingly prevalent<span class="phonetic">/ˈprevələnt/</span> phenomenon among college students.</p>
+            <p class="zh">如今，步入一个由<span class="key">数字化转型</span>主导的时代，在线学习已经成为大学生中日益普遍的现象。</p>
+        </div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">From my perspective, we should take online learning seriously.</p>
+            <p class="zh">在我看来，我们应该认真对待在线学习。</p>
+        </div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">Online learning serves as an invisible catalyst<span class="phonetic">/ˈkætəlɪst/</span> for personal and professional success.</p>
+            <p class="zh">在线学习是个人和职业成功的隐形催化剂。</p>
+        </div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">And the viewpoints are as follows.</p>
+            <p class="zh">观点如下。</p>
+        </div>
+
+        <hr style="border: none; border-top: 1px solid #f0f0f0; margin: 1rem 0;">
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">First and foremost, a pervasive<span class="phonetic">/pərˈveɪsɪv/</span> misconception<span class="phonetic">/ˌmɪskənˈsepʃn/</span> is that online learning is inferior to traditional classroom education.</p>
+            <p class="zh">首先，一个普遍的误解是在线学习不如传统课堂教学。</p>
+        </div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">Admittedly<span class="phonetic">/ədˈmɪtɪdli/</span>, a considerable<span class="phonetic">/kənˈsɪdərəbl/</span> number of people subscribe<span class="phonetic">/səbˈskraɪb/</span> to the same idea.</p>
+            <p class="zh">诚然，相当多的人认同同样的想法。</p>
+        </div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">However, this perspective<span class="phonetic">/pərˈspektɪv/</span> overlooks<span class="phonetic">/ˌoʊvərˈlʊk/</span> the flexibility and accessibility that online learning provides.</p>
+            <p class="zh">然而，这种观点忽视了在线学习提供的灵活性和可及性。</p>
+        </div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">In fact, what matters is the ability to manage one's own learning schedule.</p>
+            <p class="zh">事实上，重要的是管理自己学习时间表的能力。</p>
+        </div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">We <span class="key">can't</span> emphasize the importance of self-discipline too much.</p>
+            <p class="zh">我们再怎么强调自律的重要性也不为过。</p>
+        </div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">Conversely, those who neglect<span class="phonetic">/nɪˈɡlekt/</span> this dimension<span class="phonetic">/dɪˈmenʃn/</span> often find themselves overwhelmed<span class="phonetic">/ˌoʊvərˈwelmd/</span> when faced with unfamiliar problems.</p>
+            <p class="zh">相反，忽视这一方面的人在面对不熟悉的问题时往往会感到不知所措。</p>
+        </div>
+
+        <hr style="border: none; border-top: 1px solid #f0f0f0; margin: 1rem 0;">
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">Furthermore<span class="phonetic">/ˌfɜːrðərˈmɔːr/</span>, there is no denying that online learning breaks geographical barriers.</p>
+            <p class="zh">此外，不可否认在线学习打破了地理障碍。</p>
+        </div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">Owing to the rapid development of internet technology, we will continuously confront<span class="phonetic">/kənˈfrʌnt/</span> multifaceted<span class="phonetic">/ˌmʌltiˈfæsɪtɪd/</span> challenges in our careers.</p>
+            <p class="zh">由于互联网技术的快速发展，我们在职业生涯中将不断面临多方面的挑战。</p>
+        </div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">Consequently<span class="phonetic">/ˈkɑːnsɪkwentli/</span>, it becomes imperative<span class="phonetic">/ɪmˈperətɪv/</span> for students to develop independent learning skills.</p>
+            <p class="zh">因此，对学生来说培养独立学习技能变得至关重要。</p>
+        </div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">Online learning plays a significant role in cultivating these essential abilities.</p>
+            <p class="zh">在线学习在培养这些 essential 能力方面发挥着重要作用。</p>
+        </div>
+
+        <hr style="border: none; border-top: 1px solid #f0f0f0; margin: 1rem 0;">
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">In conclusion, online learning serves as an invisible catalyst<span class="phonetic">/ˈkætəlɪst/</span> for personal and professional success.</p>
+            <p class="zh">总之，在线学习是个人和职业成功的隐形催化剂。</p>
+        </div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">This capacity translates into better decision-making in both academic and professional contexts.</p>
+            <p class="zh">这种能力转化为学术和专业背景下更好的决策能力。</p>
+        </div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">The whole society should pay close attention to the problem of educational equity. Only in this way can we have a bright and promising future.</p>
+            <p class="zh">全社会应该密切关注教育公平的问题。只有这样，我们才能拥有光明和有前途的未来。</p>
+        </div>
+    </div>
+
+    <!-- 范文二：手机依赖 -->
+    <div class="section" style="border-left: 4px solid #ff9800;">
+        <div class="section-title" style="color: #ff9800;">范文二：Smartphone Addiction 手机依赖（双刃剑观点）</div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">Nowadays, stepping into an epoch<span class="phonetic">/ˈepək/</span> dominated by <span class="key">rapid technological advancement</span>, smartphone addiction has translated into an increasingly prevalent<span class="phonetic">/ˈprevələnt/</span> phenomenon among college students.</p>
+            <p class="zh">如今，步入一个由<span class="key">快速技术进步</span>主导的时代，手机依赖已经成为大学生中日益普遍的现象。</p>
+        </div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">As far as I am concerned, we should take smartphone addiction seriously.</p>
+            <p class="zh">在我看来，我们应该认真对待手机依赖问题。</p>
+        </div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">And the viewpoints are as follows.</p>
+            <p class="zh">观点如下。</p>
+        </div>
+
+        <hr style="border: none; border-top: 1px solid #f0f0f0; margin: 1rem 0;">
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">First and foremost, a pervasive<span class="phonetic">/pərˈveɪsɪv/</span> misconception<span class="phonetic">/ˌmɪskənˈsepʃn/</span> is that smartphones are entirely harmful to students.</p>
+            <p class="zh">首先，一个普遍的误解是手机对学生完全是 harmful 的。</p>
+        </div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">While this view is understandable, a considerable<span class="phonetic">/kənˈsɪdərəbl/</span> number of people subscribe<span class="phonetic">/səbˈskraɪb/</span> to the same idea.</p>
+            <p class="zh">虽然这种观点可以理解，相当多的人认同同样的想法。</p>
+        </div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">However, this perspective<span class="phonetic">/pərˈspektɪv/</span> overlooks<span class="phonetic">/ˌoʊvərˈlʊk/</span> the convenience and efficiency that smartphones bring.</p>
+            <p class="zh">然而，这种观点忽视了手机带来的便利和效率。</p>
+        </div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">Nothing is more important than using technology wisely.</p>
+            <p class="zh">没有什么比明智地使用 technology 更重要的了。</p>
+        </div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">Conversely, those who neglect<span class="phonetic">/nɪˈɡlekt/</span> self-control often find themselves overwhelmed<span class="phonetic">/ˌoʊvərˈwelmd/</span> by endless distractions.</p>
+            <p class="zh">相反，忽视自控力的人往往会被无尽的 distractions 所 overwhelmed。</p>
+        </div>
+
+        <hr style="border: none; border-top: 1px solid #f0f0f0; margin: 1rem 0;">
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">Furthermore<span class="phonetic">/ˌfɜːrðərˈmɔːr/</span>, there is no denying that excessive screen time affects our health.</p>
+            <p class="zh">此外，不可否认过度的屏幕时间影响我们的健康。</p>
+        </div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">Due to the addictive nature of social media, we will continuously confront<span class="phonetic">/kənˈfrʌnt/</span> multifaceted<span class="phonetic">/ˌmʌltiˈfæsɪtɪd/</span> challenges in maintaining focus.</p>
+            <p class="zh">由于社交媒体的成瘾性，我们在保持专注方面将不断面临多方面的挑战。</p>
+        </div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">Therefore, it becomes indispensable<span class="phonetic">/ˌɪndɪˈspensəbl/</span> for individuals to develop healthy digital habits.</p>
+            <p class="zh">因此，对个人来说培养健康的数字习惯变得不可或缺。</p>
+        </div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">Self-awareness plays a significant role in overcoming smartphone addiction.</p>
+            <p class="zh">自我意识在克服手机依赖方面发挥着重要作用。</p>
+        </div>
+
+        <hr style="border: none; border-top: 1px solid #f0f0f0; margin: 1rem 0;">
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">In conclusion, smartphone addiction is a double-edged sword for college students.</p>
+            <p class="zh">总之，手机依赖对大学生来说是一把双刃剑。</p>
+        </div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">It is imperative<span class="phonetic">/ɪmˈperətɪv/</span> for governments and individuals to take measures to maximize<span class="phonetic">/ˈmæksɪmaɪz/</span> the benefits while minimizing<span class="phonetic">/ˈmɪnɪmaɪz/</span> the harms, turning a potential crisis into an opportunity for growth.</p>
+            <p class="zh">政府和个人采取措施至关重要，以最大化利益、最小化危害，将潜在危机转化为成长机遇。</p>
+        </div>
+
+        <div class="template-block">
+            <p class="en" onclick="toggleZh(this)">The whole society should pay close attention to the problem of digital wellness. Only in this way can we have a bright and promising future.</p>
+            <p class="zh">全社会应该密切关注数字健康的问题。只有这样，我们才能拥有光明和有前途的未来。</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleZh(el) {
+            const zh = el.nextElementSibling;
+            if (zh && zh.classList.contains('zh')) {
+                zh.style.display = zh.style.display === 'block' ? 'none' : 'block';
+            }
+        }
+
+        function toggleAll(show) {
+            document.querySelectorAll('.zh').forEach(el => {
+                el.style.display = show ? 'block' : 'none';
+            });
+        }
+
+        let quizMode = false;
+        function toggleQuiz() {
+            quizMode = !quizMode;
+            const btn = document.getElementById('quizBtn');
+            btn.classList.toggle('active', quizMode);
+
+            if (quizMode) {
+                toggleAll(false);
+                document.querySelectorAll('.en').forEach(el => {
+                    el.style.cursor = 'pointer';
+                });
+            }
+        }
+    </script>
+</body>
+</html>
